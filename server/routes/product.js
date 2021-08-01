@@ -53,7 +53,16 @@ router.post('/products', (req, res) => {
 
   for (let key in req.body.filters) {
     if (req.body.filters[key].length > 0) {
-      findArgs[key] = req.body.filters[key];
+      console.log('key', key);
+
+      if (key === 'price') {
+        findArgs[key] = {
+          $gte: req.body.filters[key][0], // 몽고디비 지원 Greater than equal (크거나 같고)
+          $lte: req.body.filters[key][1], // Less than equal 작거나 같은
+        };
+      } else {
+        findArgs[key] = req.body.filters[key];
+      }
     }
   }
 
