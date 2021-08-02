@@ -23,8 +23,8 @@ function RadioBox({ list, handleFilters }) {
 
   return (
     <div>
-      <Collapse defaultActiveKey={['1']}>
-        <Panel header="Continents" key="1">
+      <Collapse defaultActiveKey={['0']}>
+        <Panel header="Price" key="1">
           <RadioGroup onChange={handleChange} value={Value}>
             {renderRadioBox()}
           </RadioGroup>
