@@ -40,6 +40,20 @@ const productSchema = mongoose.Schema(
   { timestamps: true } // timestamps : 자동으로 등록, 업데이트시간등 등록
 );
 
+// Control Search Results with Weights
+productSchema.index(
+  {
+    title: 'text',
+    description: 'text',
+  },
+  {
+    weights: {
+      title: 5,
+      description: 1,
+    },
+  }
+);
+
 const Product = mongoose.model('Product', productSchema);
 
 module.exports = { Product };
