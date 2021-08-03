@@ -2,6 +2,7 @@ import { Empty } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCartItems, removeCartItem } from '../../../_actions/user_actions';
+import PayPal from '../../utils/Paypal';
 import UserCardBlock from './Sections/UserCardBlock';
 
 function CartPage() {
@@ -67,6 +68,8 @@ function CartPage() {
           <p>No Items In the Cart</p>
         </>
       )}
+
+      <PayPal />
     </div>
   );
 }
