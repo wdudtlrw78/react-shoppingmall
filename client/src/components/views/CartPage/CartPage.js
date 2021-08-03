@@ -69,7 +69,7 @@ function CartPage() {
         </>
       )}
 
-      <PayPal />
+      {ShowTotal && <PayPal total={Total} />}
     </div>
   );
 }
