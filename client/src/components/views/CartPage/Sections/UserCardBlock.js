@@ -12,8 +12,8 @@ function UserCardBlock({ products }) {
 
   const renderItems = () =>
     products &&
-    products.map((product) => (
-      <tr>
+    products.map((product, index) => (
+      <tr key={index}>
         <td>
           <img
             style={{ width: '70px' }}
