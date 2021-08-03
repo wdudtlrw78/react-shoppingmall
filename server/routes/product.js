@@ -98,15 +98,24 @@ router.post('/products', (req, res) => {
 router.get('/products_by_id', (req, res) => {
   // 다이나믹 라우팅에서는 req.body가 아니라 req.query이다.
   let type = req.query.type;
-  let productId = req.query.id;
+  let productIds = req.query.id;
+
+  if (type === 'array') {
+    // id=123123123, 43534234234, 565464574 이거를
+    // productIds = ['123123123', '43534324', '56554324'] 이런식으로 바꿔주기
+    let ids = req.query.id.split(',');
+    productIds = ids.map((item) => {
+      return item;
+    });
+  }
 
   // productId를 이용해서 DB에서 productId와 같은 상품의 정보를 가져온다.
 
-  Product.find({ _id: productId })
+  Product.find({ _id: { $in: productIds } })
     .populate('writer')
     .exec((err, product) => {
       if (err) return res.status(400).send(err);
-      return res.status(200).send({ success: true, product });
+      return res.status(200).json({ success: true, product });
     });
 });
 
